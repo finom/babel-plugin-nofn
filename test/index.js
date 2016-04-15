@@ -56,7 +56,15 @@ function runTest(dir) {
 
 if (process.argv.indexOf('--watch') >= 0) {
 	require('watch').watchTree(__dirname + '/..', function () {
-		delete require.cache[pluginPath];
+		if(require.cache[pluginPath]) {
+			require.cache[pluginPath].children.forEach(function(child) {
+				if(child.filename.indexOf('node_modules') == -1) {
+					delete require.cache[child.filename];
+				}
+			});
+			delete require.cache[pluginPath];
+		}
+
 		clear();
 		console.log('Press Ctrl+C to stop watching...');
 		console.log('================================');

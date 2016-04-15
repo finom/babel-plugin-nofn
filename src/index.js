@@ -1,32 +1,14 @@
 import 'better-log/install';
-import template from "babel-template";
-import generate from 'babel-generator';
 
-/*
-for(var keys = Object.keys(object), i = 0, l = keys.length, key, value; (key = keys[i],value = object[key]), i < l; i++) {
-  doSomething(value, key);
-}*/
-/*
-keys, i, l
-key, value, object
-*/
+//import generate from 'babel-generator';
+import each from './each';
+import assign from './assign';
+const transformers = {
+	each,
+	assign
+};
 
-const build = template(`
-	for(
-		let VAR_KEYS = Object.keys(VAR_OBJECT),
-			VAR_I = 0,
-			VAR_L = VAR_KEYS.length,
-			VAR_KEY,
-			VAR_VALUE;
 
-		(	VAR_KEY = VAR_KEYS[VAR_I],
-			VAR_VALUE = VAR_OBJECT[VAR_KEY]
-		),
-		VAR_I < VAR_L;
-
-		VAR_I++
-	) {}
-`);
 
 
 module.exports = function ({ types: t }) {
@@ -34,43 +16,54 @@ module.exports = function ({ types: t }) {
 		inherits: require("babel-plugin-transform-es2015-block-scoping"),
 		visitor: {
 			CallExpression(path) {
-				 let declaration = path.get("declaration"),
-				 	{object, property} = path.node.callee;
+				 let {object, property} = path.node.callee;
 
-					if(object && property && object.name === 'nofn' && property.name == 'each') {
-						let [objectArg, callbackArg] = path.node.arguments;
+					if(object && property && object.name === 'nofn' && transformers[property.name]) {
+						let {vars, hiddenVars, nodes, build} = transformers[property.name]({path, types: t});
 
-						let [valueArg, keyArg] = callbackArg.params;
-
-						let data = {
-							hidden: {
-								VAR_KEYS: 'keys',
-								VAR_I: 'i',
-								VAR_L: 'l',
-							},
-							normal: {
-								VAR_KEY: keyArg.name,
-								VAR_VALUE: valueArg.name,
-								VAR_OBJECT: objectArg.name,
-								BODY: [callbackArg.body.body[0]]//t.blockStatement(callbackArg.body.body)
-							}
-						};
-
-						for(let i in data.hidden) if(data.hidden.hasOwnProperty(i)) {
-							data.hidden[i] = path.scope.generateUidIdentifier(data.hidden[i])
+						for(let i in hiddenVars) if(hiddenVars.hasOwnProperty(i)) {
+							hiddenVars[i] = path.scope.generateUidIdentifier(hiddenVars[i])
 						}
 
-						for(let i in data.normal) if(data.normal.hasOwnProperty(i)) {
-							data.normal[i] = t.identifier(data.normal[i])
+						for(let i in vars) if(vars.hasOwnProperty(i)) {
+							vars[i] = typeof vars[i] == 'string' ? t.identifier(vars[i]) : vars[i];
 						}
 
-						let loop = build(Object.assign({}, data.hidden, data.normal));
-						loop.body.body = [...callbackArg.body.body];
-						path.insertAfter(loop);
-						path.remove();
+						let data = Object.assign({}, nodes, hiddenVars, vars);
+
+						let loop = build(data);
+						switch(path.parentPath.type) {
+							case 'CallExpression':
+								let _path = path;
+								 while(_path.parentPath.type != 'BlockStatement' && _path.parentPath.type != 'Program') {
+									_path = _path.parentPath;
+								 }
+
+								_path.insertBefore(loop);
+
+								path.replaceWith(data.RESULT || t.identifier('undefined'));
+
+								break;
+							case 'AssignmentExpression':
+								path.parentPath.insertBefore(loop);
+								path.replaceWith(data.RESULT || t.identifier('undefined'));
+								break;
+							case 'VariableDeclarator':
+								path.parentPath.parentPath.insertBefore(loop);
+								path.replaceWith(data.RESULT || t.identifier('undefined'));
+								break;
+							default:
+								path.insertAfter(loop);
+								path.remove();
+						}
+
+						//console.log(declaration);
+						/*if(path.parent.type === 'CallExpression') {console.log('voila');
+							//console.log(declaration.parent);
+							let index = path.parent.arguments.indexOf(path.node);//console.log(path.parent);
+							path.parent.arguments[index] = declaration.parentPath.scope.generateUidIdentifier('result');
+						}*/
 					}
-
-
 			}
 		}
 	};
