@@ -3,7 +3,7 @@ import nofn from '../lib';
 describe('Module', function() {
 
 	// Test
-	it('is available', function() {
+	it('-', function() {
 		assert.deepEqual(nofn.assign({
 			a: 1,
 			b: 2
@@ -18,7 +18,7 @@ describe('Module', function() {
 		});
 	});
 
-	it('has getter for event name', function() {
+	it('-', function() {
 		let entries = [],
 			expected = [['a', 1], ['b', 2], ['c', 3], ['d', 4]];
 
