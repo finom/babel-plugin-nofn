@@ -4,6 +4,10 @@
 
 ![](http://risovach.ru/thumb/upload/240c240/2012/12/generator/chyo_7217242_orig_.jpeg)
 
+```
+npm i --save-dev babel-plugin-nofn
+```
+
 The plugin converts function calls like:
 
 ```js
