@@ -25,7 +25,7 @@ for (var target = arr, index = 0, value, l = target.length; value = target[index
 
 Which can be converted via minifier into this:
 ```js
-for(var b=arr,a=0,c,d=b.length;c=b[a],a<d;a++)doSomething(c,a)}
+for(var b=arr,a=0,c,d=b.length;c=b[a],a<d;a++){doSomething(c,a)}
 ```
 
 Versus:
