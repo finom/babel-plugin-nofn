@@ -7,4 +7,7 @@ global.expect = global.chai.expect;
 global.assert = global.chai.assert;
 
 // Load test suites
-require('./yop');
+require('./assign');
+require('./forown');
+require('./foreach');
+require('./slice');

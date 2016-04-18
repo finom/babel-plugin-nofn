@@ -1,11 +1,15 @@
 import 'better-log/install';
 
 //import generate from 'babel-generator';
-import each from './each';
+import forOwn from './forown';
 import assign from './assign';
+import forEach from './foreach';
+import slice from './slice';
 const transformers = {
-	each,
-	assign
+	forOwn,
+	assign,
+	forEach,
+	slice
 };
 
 

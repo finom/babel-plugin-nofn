@@ -1,8 +1,8 @@
 {
-  "name": "babel-plugin-hello-world",
-  "version": "1.0.0",
-  "description": "Extended plugin sample for Babel",
-  "repository": "RReverser/babel-plugin-hello-world",
+  "name": "babel-plugin-nofn",
+  "version": "0.0.0",
+  "description": "Inline function calls",
+  "repository": "finom/babel-plugin-nofn",
   "license": "MIT",
   "main": "dist/index.js",
   "dependencies": {
@@ -14,6 +14,7 @@
   "devDependencies": {
     "babel-cli": "^6.3.17",
     "babel-core": "^6.3.21",
+    "babel-loader": "^6.2.4",
     "babel-plugin-transform-runtime": "^6.3.13",
     "babel-preset-es2015": "^6.3.13",
     "babel-register": "^6.3.13",
@@ -25,19 +26,22 @@
     "fast.js": "^0.1.1",
     "lodash": "^4.11.1",
     "mocha": "^2.4.5",
-    "watch": "^0.17.1"
+    "watch": "^0.17.1",
+    "webpack": "^1.13.0"
   },
   "scripts": {
     "release": "babel src --out-dir dist",
-    "test": "node test",
+    "test": "node test && npm run unit && npm run unit-plugin",
     "watch": "node test --watch",
-    "prepublish": "npm test && npm run release",
-    "unit-compiled": "env COMPILE=YES, BABEL_DISABLE_CACHE=1 mocha unit/index.js",
-    "perf": "env COMPILE=YES, BABEL_DISABLE_CACHE=1 node perf"
+    "test-plugin": "node test",
+    "prepublish": "npm test && npm run perf-bundle && npm run release",
+    "unit": "env BABEL_DISABLE_CACHE=1 mocha unit/index.js",
+    "unit-plugin": "env COMPILE=YES, BABEL_DISABLE_CACHE=1 mocha unit/index.js",
+    "perf": "env COMPILE=YES, BABEL_DISABLE_CACHE=1 node perf/src",
+    "perf-bundle": "npm run release && webpack --config perf/webpack.conf.js",
+		"publish-all": "npm publish && cd lib && npm publish"
   },
   "keywords": [
-    "babel-plugin",
-    "sample",
-    "example"
+    "babel-plugin"
   ]
 }

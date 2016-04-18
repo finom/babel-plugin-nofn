@@ -1,0 +1,19 @@
+{
+  "name": "nofn-lib",
+  "version": "0.0.0",
+  "description": "\"Real\" nofn library",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/finom/babel-plugin-nofn.git"
+  },
+  "author": "Andrey Gubanov",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/finom/babel-plugin-nofn/issues"
+  },
+  "homepage": "https://github.com/finom/babel-plugin-nofn#readme"
+}

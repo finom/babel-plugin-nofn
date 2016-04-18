@@ -25,9 +25,10 @@ function runTests() {
 
 function runTest(dir) {
 	var output = babel.transformFileSync(dir.path + '/actual.js', {
-		presets: [],
-		plugins: [pluginPath]
-	});
+			presets: [],
+			plugins: [pluginPath]
+		}),
+		success = true;
 
 	var expected = fs.readFileSync(dir.path + '/expected.js', 'utf-8');
 
@@ -41,15 +42,23 @@ function runTest(dir) {
 	diff.diffLines(normalizeLines(output.code), normalizeLines(expected))
 	.forEach(function (part) {
 		var value = part.value;
+
 		if (part.added) {
 			value = chalk.green(part.value);
+			success = false;
 		} else if (part.removed) {
 			value = chalk.red(part.value);
+			success = false;
 		}
 
 
 		process.stdout.write(value);
 	});
+
+	if(!success) {
+		process.stdout.write('\n\n');
+		throw Error('Expectation and result of "' + dir.name + '" test case aren\'t the same');
+	}
 
 	process.stdout.write('\n\n\n');
 }

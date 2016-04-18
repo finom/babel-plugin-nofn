@@ -17,7 +17,7 @@ const build = template(`
 	) BODY;
 `);
 
-export default function each({path, types: t}) {
+export default function forOwn({path, types: t}) {
 	let [objectArg, callbackArg] = path.node.arguments;
 	let [valueArg, keyArg] = callbackArg.params;
 
