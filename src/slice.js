@@ -24,14 +24,6 @@ export default function forOwn({path, types: t}) {
 			START: startArg || t.nullLiteral(),
 			END: endArg || t.nullLiteral()
 		},
-		vars: {},
-		hiddenVars: {
-			I: 'i',
-			L: 'l',
-			J: 'j',
-			RESULT: 'result',
-			SOURCE: 'source',
-			_END: 'end'
-		}
+		vars: ['I', 'L', 'J', 'RESULT', 'SOURCE', '_END']
 	};
 };

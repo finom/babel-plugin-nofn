@@ -25,14 +25,6 @@ export default function each({path, types: t}) { // t.thisExpression()
 			OBJECT1: object1Arg || t.objectExpression([]),
 			OBJECT2: object2Arg || t.objectExpression([])
 		},
-		vars: {},
-		hiddenVars: {
-			KEYS: 'keys',
-			KEY: 'key',
-			I: 'i',
-			L: 'l',
-			RESULT: 'result',
-			SOURCE: 'source',
-		}
+		vars: ['KEYS', 'KEY', 'I', 'L', 'RESULT', 'SOURCE']
 	};
 };

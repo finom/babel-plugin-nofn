@@ -16,21 +16,16 @@ const build = template(`
 
 export default function forEach({path, types: t}) {
 	let [arrArg, callbackArg] = path.node.arguments;
-	let [valueArg, keyArg] = callbackArg.params;
+	let [valueArg, indexArg] = callbackArg.params;
 
 	return {
 		build,
 		nodes: {
 			BODY: [...callbackArg.body.body],
-			ARR: arrArg
-		},
-		vars: {
-			INDEX: keyArg || path.scope.generateUidIdentifier('index'),
+			ARR: arrArg,
+			INDEX: indexArg || path.scope.generateUidIdentifier('index'),
 			VALUE: valueArg || path.scope.generateUidIdentifier('value')
 		},
-		hiddenVars: {
-			TARGET: 'target',
-			L: 'l'
-		}
+		vars: ['TARGET', 'L']
 	};
 };

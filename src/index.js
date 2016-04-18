@@ -23,19 +23,15 @@ module.exports = function ({ types: t }) {
 				 let {object, property} = path.node.callee;
 
 					if(object && property && object.name === 'nofn' && transformers[property.name]) {
-						let {vars, hiddenVars, nodes, build} = transformers[property.name]({path, types: t});
+						let {vars, nodes, build} = transformers[property.name]({path, types: t});
 
-						for(let i in hiddenVars) if(hiddenVars.hasOwnProperty(i)) {
-							hiddenVars[i] = path.scope.generateUidIdentifier(hiddenVars[i])
+
+
+						for(let v of vars) {
+							nodes[v] = path.scope.generateUidIdentifier(v.toLowerCase());
 						}
 
-						for(let i in vars) if(vars.hasOwnProperty(i)) {
-							vars[i] = typeof vars[i] == 'string' ? t.identifier(vars[i]) : vars[i];
-						}
-
-						let data = Object.assign({}, nodes, hiddenVars, vars);
-
-						let loop = build(data);
+						let loop = build(nodes);
 						switch(path.parentPath.type) {
 							case 'CallExpression':
 								let _path = path;
@@ -45,16 +41,16 @@ module.exports = function ({ types: t }) {
 
 								_path.insertBefore(loop);
 
-								path.replaceWith(data.RESULT || t.identifier('undefined'));
+								path.replaceWith(nodes.RESULT || t.identifier('undefined'));
 
 								break;
 							case 'AssignmentExpression':
 								path.parentPath.insertBefore(loop);
-								path.replaceWith(data.RESULT || t.identifier('undefined'));
+								path.replaceWith(nodes.RESULT || t.identifier('undefined'));
 								break;
 							case 'VariableDeclarator':
 								path.parentPath.parentPath.insertBefore(loop);
-								path.replaceWith(data.RESULT || t.identifier('undefined'));
+								path.replaceWith(nodes.RESULT || t.identifier('undefined'));
 								break;
 							default:
 								path.insertAfter(loop);

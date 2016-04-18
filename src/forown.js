@@ -25,17 +25,10 @@ export default function forOwn({path, types: t}) {
 		build,
 		nodes: {
 			BODY: [...callbackArg.body.body],
-			OBJECT: objectArg
-		},
-		vars: {
+			OBJECT: objectArg,
 			KEY: keyArg || path.scope.generateUidIdentifier('key'),
 			VALUE: valueArg || path.scope.generateUidIdentifier('value')
 		},
-		hiddenVars: {
-			TARGET: 'target',
-			KEYS: 'keys',
-			I: 'i',
-			L: 'l',
-		}
+		vars: ['TARGET', 'KEYS', 'I', 'L']
 	};
 };
