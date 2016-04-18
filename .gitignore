@@ -1,4 +1,5 @@
 node_modules
 /dist
 *.log
+*.kate-swp
 .directory
