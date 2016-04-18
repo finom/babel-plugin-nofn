@@ -1,4 +1,4 @@
-# babel-plugin-nofn
+# babel-plugin-nofn [![npm version](https://badge.fury.io/js/babel-plugin-nofn.svg)](https://badge.fury.io/js/babel-plugin-nofn)
 
 > Experimental Babel plugin which takes function call and transpiles it to inline code.
 

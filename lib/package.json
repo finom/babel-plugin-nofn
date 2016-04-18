@@ -4,7 +4,7 @@
   "description": "\"Real\" nofn library",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Tests can be found there: https://github.com/finom/babel-plugin-nofn \""
   },
   "repository": {
     "type": "git",
