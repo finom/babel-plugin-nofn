@@ -1,15 +1,14 @@
 import template from "babel-template";
 
 const build = template(`
-	let SOURCE = ARR;
-	let RESULT = Array(SOURCE.length);
-	for(
-		let L = SOURCE.length,
-			J = 0,
-			I = START || 0,
-			_END = END || L;
-		I < _END;
-	) {
+	let SOURCE = ARR,
+		L = SOURCE.length,
+		I = START || 0,
+		_END = END || L,
+		J = 0,
+		RESULT = Array(_END - I);
+
+	while(I < _END) {
 		RESULT[J++] = SOURCE[I++];
 	}
 `);

@@ -1,6 +1,6 @@
 {
   "name": "babel-plugin-nofn",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Inline function calls",
   "repository": "finom/babel-plugin-nofn",
   "license": "MIT",

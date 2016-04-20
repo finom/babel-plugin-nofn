@@ -1,11 +1,14 @@
 "use strict";
 
-var _source = arr;
+var _source = arr,
+    _l = _source.length,
+    _i = start || 0,
+    _end = end || _l,
+    _j = 0,
+    _result = Array(_end - _i);
 
-var _result = Array(_source.length);
-
-for (var _l2 = _source.length, _j2 = 0, _i2 = start || 0, _end2 = end || _l2; _i2 < _end2;) {
-  _result[_j2++] = _source[_i2++];
+while (_i < _end) {
+  _result[_j++] = _source[_i++];
 }
 
 doSomething(_result);
