@@ -24,7 +24,7 @@ export default function forOwn({path, types: t}) {
 	return {
 		build,
 		nodes: {
-			BODY: [...callbackArg.body.body],
+			BODY: callbackArg.body,
 			OBJECT: objectArg,
 			KEY: keyArg || path.scope.generateUidIdentifier('key'),
 			VALUE: valueArg || path.scope.generateUidIdentifier('value')

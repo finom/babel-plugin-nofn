@@ -1,5 +1,5 @@
 "use strict";
 
-for (var _target2 = arr, index = 0, value, _l2 = _target2.length; value = _target2[index], index < _l2; index++) {
+for (var _target = arr, index = 0, value, _l = _target.length; value = _target[index], index < _l; index++) {
 	doSomething(value, index);
 }

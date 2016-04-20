@@ -21,7 +21,7 @@ export default function forEach({path, types: t}) {
 	return {
 		build,
 		nodes: {
-			BODY: [...callbackArg.body.body],
+			BODY: callbackArg.body,
 			ARR: arrArg,
 			INDEX: indexArg || path.scope.generateUidIdentifier('index'),
 			VALUE: valueArg || path.scope.generateUidIdentifier('value')
