@@ -1011,10 +1011,10 @@
 
 	module.exports = function (arrLike, start, end) {
 		var l = arrLike.length,
-		    arr = Array(l),
-		    j = 0,
 		    i = start || 0,
-		    _end = end || l;
+		    _end = end || l,
+		    arr = Array(_end - i),
+		    j = 0;
 
 		while (i < _end) {
 			arr[j++] = arrLike[i++];
@@ -18873,12 +18873,15 @@
 
 	console.time('nofn.slice');
 	for (var _i5 = 0; _i5 < times; _i5++) {
-		var _source = iterable;
+		var _source = iterable,
+		    _l = _source.length,
+		    _i6 = null || 0,
+		    _end = null || _l,
+		    _j = 0,
+		    _result = Array(_end - _i6);
 
-		var _result = Array(_source.length);
-
-		for (var _l2 = _source.length, _j2 = 0, _i7 = null || 0, _end2 = null || _l2; _i7 < _end2;) {
-			_result[_j2++] = _source[_i7++];
+		while (_i6 < _end) {
+			_result[_j++] = _source[_i6++];
 		}
 	}
 	console.timeEnd('nofn.slice');
