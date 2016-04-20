@@ -48,6 +48,10 @@ Since this is very new version, the number of implemented functions is very smal
 - ``nofn.assign(target, source)`` - extends one object by another
 - ``nofn.slice(arrayLike, start=0, end=length)`` - slices array
 
+## Syntax restrictions (known issues)
+- Don't use ``var`` in callbacks. Use ``let`` and ``const`` only to avoid variable collisions.
+- Use only arrow functions because ``this`` keyword isn't handled yet.
+
 ## Performance
 ![](http://i.imgur.com/EOUAIgQ.png)
 
