@@ -17,8 +17,15 @@ const build = template(`
 export default function forEach({path, types: t}) {
 	let [arrArg, callbackArg] = path.node.arguments;
 	let [valueArg, indexArg] = callbackArg.params;
+	const callbackBody = callbackArg.body.body;
 
-	return {
+
+	/* super dirty hach which get rids of return when using arrow function without body */
+	if(callbackBody.length === 1 && !callbackBody[0].loc && callbackBody[0].type === 'ReturnStatement') {
+		callbackBody[0] = callbackBody[0].argument;
+	}
+
+ 	return {
 		build,
 		nodes: {
 			BODY: callbackArg.body,

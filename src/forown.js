@@ -20,7 +20,14 @@ const build = template(`
 export default function forOwn({path, types: t}) {
 	let [objectArg, callbackArg] = path.node.arguments;
 	let [valueArg, keyArg] = callbackArg.params;
+	const callbackBody = callbackArg.body.body;
 
+
+	/* super dirty hach which get rids of return when using arrow function without body */
+	if(callbackBody.length === 1 && !callbackBody[0].loc && callbackBody[0].type === 'ReturnStatement') {
+		callbackBody[0] = callbackBody[0].argument;
+	}
+	
 	return {
 		build,
 		nodes: {

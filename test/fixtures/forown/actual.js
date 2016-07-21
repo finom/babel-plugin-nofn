@@ -1,3 +1,1 @@
-nofn.forOwn(object, (value, key) => {
-  doSomething(value, key);
-});
+nofn.forOwn(object, (value, key) => doSomething(value, key));

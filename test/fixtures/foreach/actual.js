@@ -1,3 +1,1 @@
-nofn.forEach(arr, (value, index) => {
-	doSomething(value, index);
-});
+nofn.forEach(arr, (value, index) => doSomething(value, index));
