@@ -62,7 +62,7 @@ console.time('nofn.map');
 j = 0;
 for(let i = 0; i < times; i++) {
 	nofn.map(iterable, (value, key) => {
-		j += npm value;
+		j += value;
     return j;
 	});
 }

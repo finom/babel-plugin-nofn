@@ -8,13 +8,16 @@ const build = template(`
 			INDEX = 0,
 			VALUE,
 			L = TARGET.length,
-			RESULT = [];
+			RESULT = [],
+			FUNC = FUNCEXP;
 		(
 			VALUE = TARGET[INDEX]
 		),
 		INDEX < L;
 		INDEX++
-	) RESULT.push(BODY);
+	) {
+		RESULT.push(FUNC(VALUE, INDEX));
+	}
 `);
 
 export default function map({path, types: t}) {
@@ -23,15 +26,12 @@ export default function map({path, types: t}) {
 	let [valueArg, indexArg] = callbackArg.params;
 	const callbackBody = callbackArg.body.body;
 
-	/* super dirty hach which get rids of return when using arrow function without body */
-	if(callbackBody.length === 1 && !callbackBody[0].loc && callbackBody[0].type === 'ReturnStatement') {
-		callbackBody[0] = callbackBody[0].argument;
-	}
 
  	return {
 		build,
 		nodes: {
-			BODY: callbackArg.body,
+			FUNC: path.scope.generateUidIdentifier('func'),
+			FUNCEXP: callbackArg,
 			ARR: arrArg,
 			RESULT: path.scope.generateUidIdentifier('result'),
 			INDEX: indexArg || path.scope.generateUidIdentifier('index'),
