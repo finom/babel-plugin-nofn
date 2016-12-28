@@ -60,7 +60,7 @@
 	__webpack_require__(54);
 	__webpack_require__(55);
 	__webpack_require__(56);
-	__webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./map\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	__webpack_require__(57);
 
 /***/ },
 /* 1 */
@@ -19944,6 +19944,80 @@
 		}
 	}
 	console.timeEnd('nofn.slice');
+
+	console.groupEnd();
+
+/***/ },
+/* 57 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var nofnLib = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../../lib\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _ = __webpack_require__(9);
+	var fast = __webpack_require__(11);
+	var times = 2e4;
+
+	var iterable = [],
+	    j = void 0;
+
+	for (var i = 0; i < 1e3; i++) {
+		iterable[i] = i * 2;
+	}
+
+	console.group('map');
+
+	console.time('_.map');
+	j = 0;
+	for (var _i = 0; _i < times; _i++) {
+		_.map(iterable, function (value, key) {
+			j += value;
+			return j;
+		});
+	}
+	console.timeEnd('_.map');
+
+	console.time('Array.prototype.map');
+	j = 0;
+	for (var _i2 = 0; _i2 < times; _i2++) {
+		iterable.map(function (value, key) {
+			j += value;
+			return j;
+		});
+	}
+	console.timeEnd('Array.prototype.map');
+
+	console.time('fast.map');
+	j = 0;
+	for (var _i3 = 0; _i3 < times; _i3++) {
+		fast.map(iterable, function (value, key) {
+			j += value;
+			return j;
+		});
+	}
+	console.timeEnd('fast.map');
+
+	console.time('nofnLib.map');
+	j = 0;
+	for (var _i4 = 0; _i4 < times; _i4++) {
+		nofnLib.map(iterable, function (value, key) {
+			j += value;
+			return j;
+		});
+	}
+	console.timeEnd('nofnLib.map');
+
+	console.time('nofn.map');
+	j = 0;
+	for (var _i5 = 0; _i5 < times; _i5++) {
+		for (var _target2 = iterable, key = 0, value, _l2 = _target2.length, _result2 = [], _func2 = function _func2(value, key) {
+			j += value;
+			return j;
+		}; value = _target2[key], key < _l2; key++) {
+			_result2.push(_func2(value, key));
+		}
+	}
+	console.timeEnd('nofn.map');
 
 	console.groupEnd();
 

@@ -1,7 +1,6 @@
 
 import template from "babel-template";
-import foreach from './foreach';
-//syntax nofn.map(source, target, func)
+
 const build = template(`
 	for(
 		let TARGET = ARR,
