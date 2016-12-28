@@ -5,11 +5,14 @@ import forOwn from './forown';
 import assign from './assign';
 import forEach from './foreach';
 import slice from './slice';
+import map from './map';
+
 const transformers = {
 	forOwn,
 	assign,
 	forEach,
-	slice
+	slice,
+	map
 };
 
 module.exports = function ({ types: t }) {
