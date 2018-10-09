@@ -13,3 +13,4 @@ require('./assign');
 require('./forown');
 require('./foreach');
 require('./slice');
+require('./map');

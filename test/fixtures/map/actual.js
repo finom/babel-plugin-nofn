@@ -1,0 +1,1 @@
+target = nofn.map(object, (value, key) => doSomething(value, key))
