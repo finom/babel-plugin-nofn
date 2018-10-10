@@ -6,13 +6,15 @@ import assign from './assign';
 import forEach from './foreach';
 import slice from './slice';
 import map from './map';
+import reduce from "./reduce";
 
 const transformers = {
 	forOwn,
 	assign,
 	forEach,
 	slice,
-	map
+	map,
+	reduce,
 };
 
 module.exports = function ({ types: t }) {

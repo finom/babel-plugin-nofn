@@ -24,7 +24,7 @@
     "console-group": "^0.2.0",
     "diff": "^2.2.2",
     "fast.js": "^0.1.1",
-    "lodash": "^4.11.1",
+    "lodash": "^4.17.1",
     "mocha": "^2.4.5",
     "watch": "^0.17.1",
     "webpack": "^1.13.0"
@@ -39,7 +39,7 @@
     "unit-plugin": "env COMPILE=YES, BABEL_DISABLE_CACHE=1 mocha unit/index.js",
     "perf": "env COMPILE=YES, BABEL_DISABLE_CACHE=1 node perf/src",
     "perf-bundle": "npm run release && webpack --config perf/webpack.conf.js",
-		"publish-all": "npm publish && cd lib && npm publish"
+    "publish-all": "npm publish && cd lib && npm publish"
   },
   "keywords": [
     "babel-plugin"

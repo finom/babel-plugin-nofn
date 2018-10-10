@@ -12,3 +12,4 @@ require('./forown');
 require('./foreach');
 require('./slice');
 require('./map');
+require("./reduce");
