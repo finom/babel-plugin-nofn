@@ -1,5 +1,5 @@
 require('babel-core/register')({
-	plugins: ['./../../src']
+	plugins: ['./../src']
 });
 
 const consoleGroup = require('console-group');

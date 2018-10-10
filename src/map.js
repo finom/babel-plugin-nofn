@@ -1,4 +1,3 @@
-
 import template from "babel-template";
 
 const build = template(`

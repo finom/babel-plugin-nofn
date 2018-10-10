@@ -47,19 +47,21 @@ Since this is very new version, the number of implemented functions is very smal
 - ``nofn.forOwn(object, callback(value, key))`` - iterates over object props
 - ``nofn.assign(target, source)`` - extends one object by another
 - ``nofn.slice(arrayLike, start=0, end=length)`` - slices array
+- ``nofn.map(arrayLike, callback(value, index))`` - maps an array-like object via given callback
+- ``nofn.reduce(arrayLike, callback(accumulator, current), initial)`` - works similar to [Array#reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce)
 
 ## Syntax restrictions (known issues)
 - Don't use ``var`` in callbacks. Use ``let`` and ``const`` only to avoid variable collisions.
 - Use only arrow functions because ``this`` keyword isn't handled yet.
 
 ## Performance
-![](http://i.imgur.com/EOUAIgQ.png)
+![](blob:https://imgur.com/ca1d59b7-1306-4299-8274-3f4a301f701b)
 
 In general the plugin shows very good performance results but some functions from lodash or fast.js can be little faster.
 
 ## Todo
-- Moar functions
-- Moar performance if possible
+- More functions
+- Improve performance if possible
 - Improve folder structure
 
 ## Current status

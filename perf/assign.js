@@ -1,4 +1,4 @@
-const nofnLib = require('../../lib');
+const nofnLib = require('../lib');
 const _ = require('lodash');
 const fast = require('fast.js');
 const times = 1e5;

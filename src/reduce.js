@@ -1,4 +1,3 @@
-
 import template from "babel-template";
 
 const build = template(`
@@ -25,8 +24,6 @@ export default function reduce({ path, types: t }) {
 
 	let [arrArg, callbackArg, initializeValueArg] = path.node.arguments;
 	let [valueArg, indexArg] = callbackArg.params;
-
-	//const callbackBody = callbackArg.body.body;
 
 
  	return {

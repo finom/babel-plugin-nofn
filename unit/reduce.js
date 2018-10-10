@@ -1,7 +1,5 @@
 import nofn from '../lib';
 
-
-
 describe('nofn.reduce', function() {
 	it('reduces a set of simple numbers', function() {
 		let entries = [1, 2, 3, 4],

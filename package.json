@@ -26,19 +26,17 @@
     "fast.js": "^0.1.1",
     "lodash": "^4.17.1",
     "mocha": "^2.4.5",
-    "watch": "^0.17.1",
-    "webpack": "^1.13.0"
+    "watch": "^0.17.1"
   },
   "scripts": {
     "release": "babel src --out-dir dist",
     "test": "node test && npm run unit && npm run unit-plugin",
     "watch": "node test --watch",
     "test-plugin": "node test",
-    "prepublish": "npm test && npm run perf-bundle && npm run release",
+    "prepublish": "npm test && npm run release",
     "unit": "env BABEL_DISABLE_CACHE=1 mocha unit/index.js",
     "unit-plugin": "env COMPILE=YES, BABEL_DISABLE_CACHE=1 mocha unit/index.js",
-    "perf": "env COMPILE=YES, BABEL_DISABLE_CACHE=1 node perf/src",
-    "perf-bundle": "npm run release && webpack --config perf/webpack.conf.js",
+    "perf": "env COMPILE=YES, BABEL_DISABLE_CACHE=1 node perf",
     "publish-all": "npm publish && cd lib && npm publish"
   },
   "keywords": [
