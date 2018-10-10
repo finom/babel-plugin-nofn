@@ -5,9 +5,7 @@ const times = 2e4;
 
 let iterable = [1, 2, 3, 4],
 	initial = 5,
-	expected = 15,
 	j;
-
 
 console.group('reduce');
 
